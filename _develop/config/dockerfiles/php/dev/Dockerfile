@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y libssl-dev libxml2-dev zlib1g-dev libic
     && docker-php-ext-install zip \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
     && docker-php-ext-install pdo \
-    && docker-php-ext-install pdo_pgsql pgsql \
+    && docker-php-ext-install pdo_mysql pdo_pgsql pgsql \
     && docker-php-ext-install opcache \
     && docker-php-ext-enable opcache \
     && docker-php-ext-install ftp \
