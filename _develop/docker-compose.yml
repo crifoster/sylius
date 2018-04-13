@@ -35,7 +35,7 @@ services:
       - ./config/nginx.logrotate:/etc/logrotate.d/nginx
     links:
       - sylius-php
-    container_name: ${PROJECT_NAME}-web
+    container_name: syliussss-web
     networks:
       sylius-net:
         ipv4_address: ${PROJECT_IP_PREFIX}.15
