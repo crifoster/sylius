@@ -2,18 +2,18 @@ version: '2'
 
 services:
   sylius-php:
-      build: ./config/dockerfiles/php/dev
-      image: sylius/dev-php
-      volumes:
-          - ./../acme:/var/www/vhosts/acme
-          - /etc/localtime:/etc/localtime
-      container_name: ${PROJECT_NAME}-php
-      environment:
-          XDEBUG_CONFIG: remote_host=${PROJECT_IP_PREFIX}.1
-      working_dir: /var/www/vhosts/acme/
-      networks:
-          - sylius-net
-      restart: on-failure:10
+    build: ./config/dockerfiles/php/dev
+    image: sylius/dev-php
+    volumes:
+      - ./../acme:/var/www/vhosts/acme
+      - /etc/localtime:/etc/localtime
+    container_name: ${PROJECT_NAME}-php
+    environment:
+      XDEBUG_CONFIG: remote_host=${PROJECT_IP_PREFIX}.1
+    working_dir: /var/www/vhosts/acme/
+    networks:
+      - sylius-net
+    restart: on-failure:10
   sylius-mysql:
     image: 'bitnami/mysql:latest'
     environment:
@@ -24,27 +24,27 @@ services:
     ports:
       - "3306:3306"
     networks:
-        sylius-net:
-           ipv4_address: ${PROJECT_IP_PREFIX}.21
+      sylius-net:
+        ipv4_address: ${PROJECT_IP_PREFIX}.21
   sylius-web:
-      build: ./config/dockerfiles/nginx
-      volumes:
-          - ./../acme:/var/www/vhosts/acme
-          - ./config/site-symfony3.conf:/etc/nginx/conf.d/site.conf
-          - ./nginx/log:/var/log/nginx
-          - ./config/nginx.logrotate:/etc/logrotate.d/nginx
-      links:
-          - sylius-php
-      container_name: ${PROJECT_NAME}-web
-      networks:
-        sylius-net:
-          ipv4_address: ${PROJECT_IP_PREFIX}.15
-      restart: on-failure:10
+    build: ./config/dockerfiles/nginx
+    volumes:
+      - ./../acme:/var/www/vhosts/acme
+      - ./config/site-symfony3.conf:/etc/nginx/conf.d/site.conf
+      - ./nginx/log:/var/log/nginx
+      - ./config/nginx.logrotate:/etc/logrotate.d/nginx
+    links:
+      - sylius-php
+    container_name: ${PROJECT_NAME}-web
+    networks:
+      sylius-net:
+        ipv4_address: ${PROJECT_IP_PREFIX}.15
+    restart: on-failure:10
 networks:
-     sylius-net:
-        driver: bridge
-        ipam:
-          driver: default
-          config:
-          - subnet: ${PROJECT_IP_PREFIX}.0/24
-            gateway: ${PROJECT_IP_PREFIX}.1
+  sylius-net:
+     driver: bridge
+     ipam:
+       driver: default
+       config:
+       - subnet: ${PROJECT_IP_PREFIX}.0/24
+         gateway: ${PROJECT_IP_PREFIX}.1
