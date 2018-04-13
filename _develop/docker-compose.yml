@@ -1,6 +1,31 @@
 version: '2'
 
 services:
+  sylius-php:
+      build: ./config/dockerfiles/php/dev
+      image: sylius/dev-php
+      volumes:
+          - ./../acme:/var/www/vhosts/acme
+          - /etc/localtime:/etc/localtime
+      container_name: ${PROJECT_NAME}-php
+      environment:
+          XDEBUG_CONFIG: remote_host=${PROJECT_IP_PREFIX}.1
+      working_dir: /var/www/vhosts/acme/
+      networks:
+          - sylius-net
+      restart: on-failure:10
+  sylius-mysql:
+    image: 'bitnami/mysql:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    networks:
+        sylius-net:
+           ipv4_address: ${PROJECT_IP_PREFIX}.21
   sylius-web:
       build: ./config/dockerfiles/nginx
       volumes:
@@ -15,33 +40,6 @@ services:
         sylius-net:
           ipv4_address: ${PROJECT_IP_PREFIX}.15
       restart: on-failure:10
-  sylius-php:
-      build: ./config/dockerfiles/php/dev
-      image: sylius/dev-php
-      volumes:
-          - ./../acme:/var/www/vhosts/acme
-          - /etc/localtime:/etc/localtime
-      container_name: ${PROJECT_NAME}-php
-      environment:
-          XDEBUG_CONFIG: remote_host=${PROJECT_IP_PREFIX}.1
-      working_dir: /var/www/vhosts/acme/
-      networks:
-          - sylius-net
-      restart: on-failure:10
-
-  sylius-mysql:
-    image: 'bitnami/mysql:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-    ports:
-      - "3306:3306"
-    networks:
-        sylius-net:
-           ipv4_address: ${PROJECT_IP_PREFIX}.21
-
 networks:
      sylius-net:
         driver: bridge
