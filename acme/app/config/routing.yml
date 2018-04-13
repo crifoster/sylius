@@ -11,7 +11,7 @@ sylius_api:
 
 sylius_shop:
     resource: "@SyliusShopBundle/Resources/config/routing.yml"
-    prefix: /{_locale}
+    prefix: /
     requirements:
         _locale: ^[a-z]{2}(?:_[A-Z]{2})?$
 
