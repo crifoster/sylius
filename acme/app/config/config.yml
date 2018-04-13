@@ -9,6 +9,7 @@ imports:
 
     - { resource: "parameters.yml" }
     - { resource: "security.yml" }
+    - { resource: "@BitBagSyliusCmsPlugin/Resources/config/config.yml" }
 
 parameters:
     locale: pl_PL
