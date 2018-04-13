@@ -16,6 +16,7 @@ services:
     restart: on-failure:10
   sylius-mysql:
     image: 'bitnami/mysql:latest'
+    container_name: sylius-mysql
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - MYSQL_DATABASE=${MYSQL_DATABASE}
@@ -27,7 +28,8 @@ services:
       sylius-net:
         ipv4_address: ${PROJECT_IP_PREFIX}.21
   sylius-web:
-    build: ./config/dockerfiles/nginx
+#    build: ./config/dockerfiles/nginx
+    image: nginx:latest
     volumes:
       - ./../acme:/var/www/vhosts/acme
       - ./config/site-symfony3.conf:/etc/nginx/conf.d/site.conf
@@ -35,7 +37,7 @@ services:
       - ./config/nginx.logrotate:/etc/logrotate.d/nginx
     links:
       - sylius-php
-    container_name: syliussss-web
+    container_name: sylius-web
     networks:
       sylius-net:
         ipv4_address: ${PROJECT_IP_PREFIX}.15
