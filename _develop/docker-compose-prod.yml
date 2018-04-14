@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  sylius-web:
+    volumes:
+      - ./../acme:/var/www/vhosts/acme
+      - ./config/site-symfony3-prod.conf:/etc/nginx/conf.d/site.conf
+      - ./nginx/log:/var/log/nginx
+      - ./config/nginx.logrotate:/etc/logrotate.d/nginx
+    restart: always

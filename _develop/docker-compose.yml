@@ -16,7 +16,7 @@ services:
     restart: on-failure:10
   sylius-mysql:
     image: 'bitnami/mysql:latest'
-    container_name: sylius-mysql
+    container_name: ${PROJECT_NAME}-mysql
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - MYSQL_DATABASE=${MYSQL_DATABASE}
