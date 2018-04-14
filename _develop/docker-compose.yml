@@ -30,6 +30,8 @@ services:
   sylius-web:
 #    build: ./config/dockerfiles/nginx
     image: nginx:latest
+    ports: 
+      - "80:80"
     volumes:
       - ./../acme:/var/www/vhosts/acme
       - ./config/site-symfony3.conf:/etc/nginx/conf.d/site.conf
