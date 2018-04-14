@@ -1,11 +1,20 @@
-    sudo chown -R ${USER}:${USER} acme/
+DEV
+docker-compose up -d
+
+PROD
+docker-compose -f docker-compose.yml -f docker-compose-prod.yml up -d
+
+sudo chown -R ${USER}:${USER} acme/
+
+INSTALL:
+1. docker exec -it sylius-php composer install
+2. docker exec -it sylius-php php bin/console doctrine:schema:update --force
+3. docker exec -it sylius-php php bin/console sylius:install
+   - Na dwa pierwsze pytania odpowedz nie. Nie usuwaj tabel i bazy
 
 
-docker exec -it sylius-php composer install
 
-docker exec -it sylius-php php bin/console doctrine:schema:update --force
 
-docker exec -it sylius-php php bin/console sylius:install
 
 docker exec -it sylius-php php bin/console assets:install
 

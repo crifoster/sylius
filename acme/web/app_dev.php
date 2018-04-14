@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+umask(0000);
+
 use Symfony\Component\Debug\Debug;
 use Symfony\Component\HttpFoundation\Request;
 
