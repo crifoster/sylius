@@ -46,6 +46,19 @@ services:
       sylius-net:
         ipv4_address: ${PROJECT_IP_PREFIX}.15
     restart: on-failure:10
+
+  sylius-phpmyadmin:
+      image: phpmyadmin/phpmyadmin
+      container_name: ${PROJECT_NAME}-phpmyadmin
+      environment:
+       - PMA_ARBITRARY=1
+      volumes:
+       - /sessions
+      networks:
+        sylius-net:
+          ipv4_address: ${PROJECT_IP_PREFIX}.25
+      restart: always
+
 networks:
   sylius-net:
      driver: bridge

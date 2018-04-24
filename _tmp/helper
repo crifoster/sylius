@@ -5,10 +5,6 @@ PROD
 docker-compose -f docker-compose.yml -f docker-compose-prod.yml up -d
 docker exec -it sylius-php php bin/console --env=prod --no-debug cache:clear
 
-
-
-sudo chown -R ${USER}:${USER} acme/
-
 INSTALL:
 1. docker exec -it sylius-php composer install
 2. docker exec -it sylius-php php bin/console doctrine:schema:update --force
