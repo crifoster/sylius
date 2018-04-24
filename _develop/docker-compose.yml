@@ -32,7 +32,7 @@ services:
   sylius-web:
 #    build: ./config/dockerfiles/nginx
     image: nginx:latest
-    ports: 
+    ports:
       - "80:80"
     volumes:
       - ./../acme:/var/www/vhosts/acme
@@ -50,6 +50,8 @@ services:
   sylius-phpmyadmin:
       image: phpmyadmin/phpmyadmin
       container_name: ${PROJECT_NAME}-phpmyadmin
+      ports:
+        - "80:80"
       environment:
        - PMA_ARBITRARY=1
       volumes:
