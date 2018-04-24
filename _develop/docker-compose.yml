@@ -15,10 +15,10 @@ services:
       - sylius-net
     restart: on-failure:10
   sylius-mysql:
-    image: 'bitnami/mysql:latest'
+    image: mysql:5.7
     container_name: ${PROJECT_NAME}-mysql
     environment:
-      - ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
