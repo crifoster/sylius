@@ -12,10 +12,6 @@ INSTALL:
 3. docker exec -it sylius-php php bin/console sylius:install
    - Na dwa pierwsze pytania odpowedz nie. Nie usuwaj tabel i bazy
 
-
-
-
-
 docker exec -it sylius-php php bin/console assets:install
 
 docker exec -it sylius-php php bin/console cache:clear
@@ -23,8 +19,7 @@ docker exec -it sylius-php php bin/console cache:clear
 yarn install
 yarn run gulp
 
-
-
+sudo chown -R ${USER}:${USER} acme/ && chmod 777 -R acme/var/cache/ && chmod 777 -R acme/var/logs/
 
 
 # This file is auto-generated during the composer install
