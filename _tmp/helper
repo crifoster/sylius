@@ -3,6 +3,9 @@ docker-compose up -d
 
 PROD
 docker-compose -f docker-compose.yml -f docker-compose-prod.yml up -d
+docker exec -it sylius-php php bin/console --env=prod --no-debug cache:clear
+
+
 
 sudo chown -R ${USER}:${USER} acme/
 

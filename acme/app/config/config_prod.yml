@@ -4,6 +4,10 @@
 imports:
     - { resource: "config.yml" }
 
+doctrine:
+    dbal:
+        dbname: "%database_name%_dev"
+
 monolog:
     handlers:
         main:
