@@ -8,7 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-umask(0000);
+
+declare(strict_types=1);
+
 use Symfony\Component\HttpFoundation\Request;
 
 /*
@@ -16,11 +18,9 @@ use Symfony\Component\HttpFoundation\Request;
  * Live (production) environment.
  */
 
-/** @var \Composer\Autoload\ClassLoader $loader */
-$loader = require __DIR__.'/../vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 
 $kernel = new AppKernel('prod', false);
-$kernel->loadClassCache();
 
 $request = Request::createFromGlobals();
 

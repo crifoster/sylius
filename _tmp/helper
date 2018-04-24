@@ -41,11 +41,11 @@ parameters:
     mailer_password: '%env(SYLIUS_MAILER_PASSWORD)%'
     secret: '%env(SYLIUS_SECRET)'
     env(SYLIUS_DATABASE_DRIVER): pdo_mysql
-    env(SYLIUS_DATABASE_HOST): 127.0.0.1
-    env(SYLIUS_DATABASE_PORT): null
+    env(SYLIUS_DATABASE_HOST): 172.255.120.21
+    env(SYLIUS_DATABASE_PORT): 3306
     env(SYLIUS_DATABASE_NAME): sylius
-    env(SYLIUS_DATABASE_USER): root
-    env(SYLIUS_DATABASE_PASSWORD): null
+    env(SYLIUS_DATABASE_USER): sylius
+    env(SYLIUS_DATABASE_PASSWORD): sylius
     env(SYLIUS_MAILER_TRANSPORT): smtp
     env(SYLIUS_MAILER_HOST): 127.0.0.1
     env(SYLIUS_MAILER_USER): null

@@ -7,6 +7,9 @@ imports:
 parameters:
     locale: en_US
 
+fidry_alice_data_fixtures:
+    default_purge_mode: no_purge
+
 framework:
     test: ~
     session:
@@ -22,22 +25,6 @@ monolog:
             type: stream
             path: "%kernel.logs_dir%/%kernel.environment%.log"
             level: error
-
-payum:
-    gateways:
-        paypal_express_checkout:
-            factory: paypal_express_checkout
-            payum.http_client: "@sylius.payum.http_client"
-            username: TEST
-            password: TEST
-            signature: TEST
-            sandbox: true
-        credit_card:
-            factory: stripe_checkout
-            secret_key: EDITME
-            publishable_key: EDITME
-            payum.template.layout: SyliusShopBundle::Checkout/layout.html.twig
-            payum.template.obtain_token: SyliusPayumBundle::Action/Stripe/obtainCheckoutToken.html.twig
 
 swiftmailer:
     disable_delivery: true
